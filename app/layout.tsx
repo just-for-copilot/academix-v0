@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
+import type { NextFontWithVariable } from "next/dist/compiled/@next/font";
+import "material-symbols/outlined.css";
 import "./globals.css";
+import { cn } from "@/lib/utils";
 
-const geistSans = Geist({
+const inter: NextFontWithVariable = Inter({ subsets: ['latin'], variable: '--font-sans' });
+
+const geistSans: NextFontWithVariable = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const geistMono: NextFontWithVariable = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -25,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
