@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation'
 
 import { createClient } from '@/lib/client'
 import { Button } from '@/components/ui/button'
+import { LucideLogOut } from 'lucide-react'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
 
 export function LogoutButton() {
   const router = useRouter()
@@ -14,5 +16,14 @@ export function LogoutButton() {
     router.push('/auth/login')
   }
 
-  return <Button onClick={logout}>Logout</Button>
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipContent side='right'>Log Out</TooltipContent>
+        <TooltipTrigger>
+          <Button onClick={logout}><LucideLogOut strokeWidth={3} /></Button>
+        </TooltipTrigger>
+      </Tooltip>
+    </TooltipProvider>
+  )
 }

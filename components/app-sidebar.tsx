@@ -2,6 +2,7 @@ import { Home, Settings, Users, HelpCircle } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
@@ -10,6 +11,7 @@ import {
 } from "@/components/ui/sidebar"
 import { TooltipProvider, TooltipTrigger } from "./ui/tooltip"
 import { Tooltip, TooltipContent } from "./ui/tooltip"
+import { LogoutButton } from "./logout-button"
 
 const items = [
   { title: "Home", url: "#", icon: Home },
@@ -40,7 +42,7 @@ export function AppSidebar() {
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     </TooltipTrigger>
-                    <TooltipContent>
+                    <TooltipContent side="right">
                       <Tooltip>
                         <p>{item.title}</p>
                       </Tooltip>
@@ -52,6 +54,9 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <LogoutButton />
+      </SidebarFooter>
     </Sidebar>
   )
 }
