@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { createClient } from '@/lib/server'
+import { Main } from 'next/document'
 
 export default async function ProtectedPage() {
   const supabase = await createClient()
@@ -12,7 +13,7 @@ export default async function ProtectedPage() {
   }
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <AppSidebar />
     </SidebarProvider>
   )
