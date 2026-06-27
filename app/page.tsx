@@ -3,6 +3,13 @@ import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { createClient } from '@/lib/server'
 import { Main } from 'next/document'
+import { Card, CardHeader } from '@/components/ui/card'
+import UserName from '@/components/user-name'
+import localFont from 'next/font/local'
+
+const anthropicSerif = localFont({
+  src: '../public/AnthropicSerif-Display-Light-Static.otf',
+})
 
 export default async function ProtectedPage() {
   const supabase = await createClient()
@@ -13,8 +20,18 @@ export default async function ProtectedPage() {
   }
 
   return (
-    <SidebarProvider defaultOpen={false}>
-      <AppSidebar />
-    </SidebarProvider>
+    <div className='w-screen h-screen'>
+      <SidebarProvider defaultOpen={false}>
+        <AppSidebar />
+        <div className='flex flex-col min-w-[calc(100vw-50px)] min-h-max p-10 gap-10'>
+          <h1 className={`text-4xl ${anthropicSerif.className}`}>Welcome Back, <UserName /></h1>
+          <Card className=''>
+            <CardHeader>
+              <h1 className={`text-2xl ${anthropicSerif.className}`}>Weekly Report</h1>
+            </CardHeader>
+          </Card>
+        </div>
+      </SidebarProvider>
+    </div>
   )
 }
