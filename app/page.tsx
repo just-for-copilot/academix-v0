@@ -3,7 +3,7 @@ import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { createClient } from '@/lib/server'
 import { Main } from 'next/document'
-import { Card, CardHeader } from '@/components/ui/card'
+import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import UserName from '@/components/user-name'
 import localFont from 'next/font/local'
 
@@ -29,6 +29,9 @@ export default async function ProtectedPage() {
             <CardHeader>
               <h1 className={`text-2xl ${anthropicSerif.className}`}>Weekly Report</h1>
             </CardHeader>
+            <CardContent>
+              <p className='text-sm text-muted-foreground'>You have no upcoming events, enjoy your week!</p>
+            </CardContent>
           </Card>
         </div>
       </SidebarProvider>
