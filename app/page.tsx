@@ -6,6 +6,8 @@ import { Main } from 'next/document'
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import UserName from '@/components/user-name'
 import localFont from 'next/font/local'
+import TodoList from '@/components/todo-list'
+import { getTodos } from '@/app/actions/todo'
 
 const anthropicSerif = localFont({
   src: '../public/AnthropicSerif-Display-Light-Static.otf',
@@ -19,6 +21,8 @@ export default async function ProtectedPage() {
     redirect('/auth/login')
   }
 
+  const todos = await getTodos()
+
   return (
     <div className='w-screen h-screen'>
       <SidebarProvider defaultOpen={false}>
@@ -30,7 +34,7 @@ export default async function ProtectedPage() {
               <h1 className={`text-2xl ${anthropicSerif.className}`}>Weekly Report</h1>
             </CardHeader>
             <CardContent>
-              <p className='text-sm text-muted-foreground'>You have no upcoming events, enjoy your week!</p>
+              <TodoList initialTodos={todos} />
             </CardContent>
           </Card>
         </div>
