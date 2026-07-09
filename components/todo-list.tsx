@@ -5,6 +5,7 @@ import { addTodo, toggleTodo, deleteTodo } from '@/app/actions/todo'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Trash2 } from 'lucide-react'
+import { Checkbox } from './ui/checkbox'
 
 type Todo = {
   id: string
@@ -36,10 +37,11 @@ export default function TodoList({ initialTodos }: { initialTodos: Todo[] }) {
   return (
     <div className="space-y-4">
       <form action={handleAddTodo} className="flex gap-2">
-        <Input 
-          name="task" 
-          placeholder="Add a new task..." 
+        <Input
+          name="task"
+          placeholder="Add a new task..."
           disabled={isPending}
+          autoComplete='off'
           required
         />
         <Button type="submit" disabled={isPending}>Add</Button>
@@ -52,20 +54,18 @@ export default function TodoList({ initialTodos }: { initialTodos: Todo[] }) {
           {initialTodos.map((todo) => (
             <li key={todo.id} className="flex items-center justify-between gap-2 p-2 rounded border bg-card">
               <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
+                <Checkbox
                   checked={todo.is_completed}
-                  onChange={(e) => handleToggle(todo.id, e.target.checked)}
+                  onCheckedChange={() => handleToggle(todo.id, !todo.is_completed)}
                   disabled={isPending}
-                  className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
                 />
                 <span className={`text-sm ${todo.is_completed ? 'line-through text-muted-foreground' : ''}`}>
                   {todo.task}
                 </span>
               </div>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={() => handleDelete(todo.id)}
                 disabled={isPending}
                 className="h-8 w-8 text-destructive"

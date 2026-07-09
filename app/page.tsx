@@ -27,6 +27,7 @@ export default async function ProtectedPage() {
     <div className='w-screen h-screen'>
       <SidebarProvider defaultOpen={false}>
         <AppSidebar />
+        <SidebarTrigger className='absolute top-4 left-4 z-50 md:hidden' />
         <div className='flex flex-col min-w-[calc(100vw-50px)] min-h-max p-10 gap-10'>
           <h1 className={`text-4xl ${anthropicSerif.className}`}>Welcome Back, <UserName /></h1>
           <Card className=''>

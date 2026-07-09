@@ -14,10 +14,8 @@ import { Tooltip, TooltipContent } from "./ui/tooltip"
 import { LogoutButton } from "./logout-button"
 
 const items = [
-  { title: "Home", url: "#", icon: Home },
-  { title: "Users", url: "#", icon: Users },
-  { title: "Settings", url: "#", icon: Settings },
-  { title: "Help", url: "#", icon: HelpCircle },
+  { title: "Home", url: "/", icon: Home },
+  { title: "Settings", url: "/settings", icon: Settings }
 ]
 
 export function AppSidebar() {
