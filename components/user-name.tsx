@@ -1,23 +1,31 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClient } from '@/lib/client' // Your browser client helper
+import { createClient } from '@/lib/client' // or your client-side supabase helper
 
-export default function UserWidget() {
-    const supabase = createClient()
-    const [userName, setUserName] = useState<string | null>(null)
+export default function UserName() {
+  const [name, setName] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        async function fetchUser() {
-            const { data: { user } } = await supabase.auth.getUser()
-            if (user) {
-                // Handle names from standard metadata or OAuth providers
-                const name = user.user_metadata?.full_name || user.user_metadata?.name
-                setUserName(name)
-            }
-        }
-        fetchUser()
-    }, [])
+  useEffect(() => {
+    async function getUser() {
+      const supabase = createClient()
+      const { data: { user } } = await supabase.auth.getUser()
+      
+      // Fallback to email if display name isn't set
+      setName(user?.user_metadata?.full_name || user?.email || 'User')
+      setLoading(false)
+    }
+    getUser()
+  }, [])
 
-    return userName
+  // Show a subtle loading skeleton or nothing while fetching so it doesn't jump
+  if (loading) return <span className="opacity-0">Loading...</span>
+
+  // The animation now triggers seamlessly ONLY when the name is ready
+  return (
+    <span className="inline-block animate-in fade-in slide-in-from-bottom-3 duration-700 ease-out fill-mode-both">
+      {name}
+    </span>
+  )
 }

@@ -2,7 +2,6 @@ import { redirect } from 'next/navigation'
 import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { createClient } from '@/lib/server'
-import { Main } from 'next/document'
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import UserName from '@/components/user-name'
 import localFont from 'next/font/local'
@@ -29,7 +28,12 @@ export default async function ProtectedPage() {
         <AppSidebar />
         <SidebarTrigger className='absolute top-4 left-4 z-50 md:hidden' />
         <div className='flex flex-col min-w-[calc(100vw-50px)] min-h-max p-10 gap-10'>
-          <h1 className={`text-4xl ${anthropicSerif.className}`}>Welcome Back, <UserName /></h1>
+          
+          {/* Clean heading - animation is now handled internally */}
+          <h1 className={`text-4xl ${anthropicSerif.className}`}>
+            Welcome Back, <UserName />
+          </h1>
+
           <Card className=''>
             <CardHeader>
               <h1 className={`text-2xl ${anthropicSerif.className}`}>Weekly Report</h1>
