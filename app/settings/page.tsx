@@ -123,7 +123,7 @@ export default async function SettingsPage() {
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-end">
-                  <SubmitButton loadingText="Updating preferences...">
+                  <SubmitButton>
                     <Save className="mr-2 h-4 w-4" />
                     Save Preferences
                   </SubmitButton>
@@ -145,7 +145,7 @@ export default async function SettingsPage() {
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-end">
-                  <SubmitButton loadingText="Changing password...">
+                  <SubmitButton>
                     Update Password
                   </SubmitButton>
                 </CardFooter>
