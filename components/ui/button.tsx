@@ -39,16 +39,21 @@ const buttonVariants = cva(
   }
 )
 
+// 1. Defined and exported the ButtonProps interface explicitly
+export interface ButtonProps
+  extends React.ComponentProps<"button">,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+}
+
+// 2. Used the clean interface for the component props signature
 function Button({
   className,
   variant = "default",
   size = "default",
   asChild = false,
   ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
-  }) {
+}: ButtonProps) {
   const Comp = asChild ? Slot.Root : "button"
 
   return (
@@ -62,4 +67,5 @@ function Button({
   )
 }
 
+// 3. Made sure Button and buttonVariants are exported
 export { Button, buttonVariants }
